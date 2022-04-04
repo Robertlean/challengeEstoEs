@@ -1,7 +1,8 @@
 const projectsServices = require("../services/projectsServices")
-const Success = require("../handlers/sucessHandler");
+const Success = require("../handlers/successHandler");
 
 const createProject = async (req, res, next) => {
+  console.log("Pase por aqui")
   const { name, description, projectManager, userId, status } = req.body;
   try {
     const newProject = await projectsServices.create(
@@ -12,20 +13,30 @@ const createProject = async (req, res, next) => {
       status
     );
 
-    res.json(new Success(newProject));
+    res.status(200).json({
+      status: 200,
+      msg: `Project ${name} has been created`,
+      data: newProject
+    });
   } catch (error) {
-    next()
+    next(error)
   }
 };
 
 const getAllProjects = async (req, res, next) => {
-  const name = req.query.name;
+  
   try {
-    const projects = await projectsServices.getAll(name);
+    const page = +req.query.page;
+    const projects = await projectsServices.getAll(req, page);
     
-    res.json(new Success(projects))
+    res.status(200).json({
+      status: 200,
+      data: projects,
+      previousPage: projects.previousPage,
+      nextPage: projects.nextPaage
+    })
   } catch (error) {
-    next()
+    next(error)
   }
 };
 

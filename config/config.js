@@ -4,7 +4,7 @@ const config = require("./index");
 module.exports = {
   development: {
     username: config.database.username,
-    password: config.database.password,
+    password: null,
     database: config.database.database,
     host: config.database.host,
     dialect: "mysql",

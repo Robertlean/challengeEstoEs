@@ -1,7 +1,6 @@
 const { Project } = require("../models");
-const db = reqire("../models");
+const db = require("../models");
 const Op = db.Sequelize.Op;
-/* const logger = require("../loaders/logger"); */
 const appError = require("../errors/appError");
 
 const create = async (name, description, projectManager, userId, status) => {

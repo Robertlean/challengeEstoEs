@@ -2,7 +2,7 @@ const {check} = require("express-validator");
 const appError = require("../../errors/appError");
 const projectService = require("../../services/projectsServices");
 const userService = require("../../services/usersServices");
-const {validationRresult} = require("../commons");
+const {validationResult} = require("../commons");
 
 const _nameRequired = check("name", "Name is required").not().isEmpty()
 const _nameValid = check("name", "Name must is invalid").optional().isString();
@@ -20,7 +20,7 @@ const _projectManagerValid = check("projectManager", "Project Manager is invalid
 const _userIdRequired = check("userId", "User id is required").not().isEmpty();
 const _userIdExist = check("userId").custom(async (id = "") => {
   const idFound = await userService.findUserById(id);
-  if (!idFouund) {
+  if (!idFound) {
     throw new appError("The user doesn't exist in DB", 400);
   }
 });

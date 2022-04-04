@@ -1,4 +1,4 @@
-const ExpressServer = require("./server/expressSErver");
+const ExpressServer = require("./server/expressServer");
 const config = require("../config");
 const logger = require("./logger");
 

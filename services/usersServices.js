@@ -1,5 +1,4 @@
 const {User} = require("../models");
-const logger = require("../loaders/logger");
 const appError = require("../errors/appError");
 
 const getUsers = async () => {
