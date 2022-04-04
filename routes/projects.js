@@ -1,16 +1,16 @@
-const {Router} = require("express");
+const { Router } = require("express");
 const {
-    getRequestValidations,
-    postRequestValidations,
-    putRequestValidations,
-    deleteRequestValidations
-    } = require("../middlewares/project/index");
+  getRequestValidations,
+  postRequestValidations,
+  putRequestValidations,
+  deleteRequestValidations
+} = require("../middlewares/project/index");
 const {
-    getAllProjects,
-    createProject,
-    updateProject,
-    deleteProject,
-    projectById
+  getAllProjects,
+  createProject,
+  updateProject,
+  deleteProject,
+  projectById
 } = require("../controllers/projects");
 
 const router = Router()
@@ -81,16 +81,224 @@ router.delete("/:id", deleteRequestValidations, deleteProject);
  *                          "type": "object",
  *                          "items": {
  *                              "$ref": "#/components/schemas/Projects"
-                            }
+ *                           }
  *                      }
  *                  }
  *              },
  *              "404": {"description": "Project not found"},
  *              "500": {"description": "Internal server error"}
  *           }
-        }
+ *       }
  *  }
  * 
+ */
+
+/**
+ * @swagger
+ * {
+ *  "/projects/{id}": {
+ *      "get": {
+ *          "summary": "Get a project by id",
+ *          "tags": ["Project"],
+ *          "parameters": [
+ *              {
+ *                  "name": "id",
+ *                  "in": "path",
+ *                  "description": "This id of the project",
+ *                  "required": false,
+ *                  "type": "integer",
+ *                  "example": 1
+ *              }
+ *          ],
+ *          "responses": {
+ *              "200": {
+ *                  "description": "Successful operation"
+ *              },
+ *              "404": {
+ *                  "description": "project not found"
+ *              },
+ *              "500": {
+ *                  "description": "Internal server error"
+ *              }
+ *          } 
+ *      }
+ *  }
+ * }
+ */
+
+/**
+ * @swagger
+ * {
+ *  "/projects/findName/{name}": {
+ *    "get": {
+ *      "summary": "Get a project by name",
+ *      "tags": ["Project"],
+ *      "parameters": [
+ *        {
+ *          "name": "name",
+ *          "in": "path",
+ *          "description": "The name of the project",
+ *          "type": "string",
+ *          "example": "challenge Esto Es"
+ *        }
+ *      ],
+ *      "responses": {
+ *        "200": {
+ *          "description": "Successful operation"
+ *        },
+ *        "404": {
+ *          "description": "Project not found"
+ *        },
+ *        "500": {
+ *          "description": "Internal server error"
+ *        }
+ *      }
+ *    }
+ *  }
+ * }
+ */
+
+/**
+ * @swagger
+ * {
+ *  "/projects": {
+ *    "post": {
+ *      "summary": "Create a project",
+ *      "requestBody": {
+ *        "content": {
+ *          "application/json": {
+ *            "schema": {
+ *              "type": "object",
+ *              "$ref": "#/components/schemas/Projects"
+ *            }
+ *          }
+ *        }
+ *      },
+ *      "tags": ["Project"],
+ *      "responses": {
+ *        "200": {
+ *          "description": "Project has been created"
+ *        },
+ *        "500": {
+ *          "description": "Internal server error"
+ *        }
+ *      }
+ *    }
+ *  }
+ * }
+ */
+
+/**
+ * @swagger
+ * {
+ *  "/projects/{id}": {
+ *    "post": {
+ *      "summary": "Update a project by id",
+ *      "parameters": [
+ *        {
+ *          "name": "id",
+ *          "in": "path",
+ *          "description": "The id of the project",
+ *          "type": "integer"
+ *        }
+ *      ],
+ *      "requestBody": {
+ *        "required": "true",
+ *        "content": {
+ *          "application/json": {
+ *            "schema": {
+ *              "type": "object",
+ *              "$ref": "#/components/schemas/Projects"
+ *            }
+ *          }
+ *        }
+ *      },
+ *      "tags": ["Project"],
+ *      "responses": {
+ *        "200": {
+ *          "description": "Project has been update"
+ *        },
+ *        "404": {
+ *          "description": "Project not found"
+ *        },
+ *        "500": {
+ *          "description": "Internal server error"
+ *        }
+ *      }
+ *    }
+ *  }
+ * }
+ */
+
+/**
+ * @swagger
+ * {
+ *  "/projects/{id}/assing": {
+ *    "post": {
+ *      "summary": "Update a project by id",
+ *      "parameters": [
+ *        {
+ *          "name": "id",
+ *          "in": "path",
+ *          "description": "The id of the project",
+ *          "type": "integer"
+ *        }
+ *      ],
+ *      "requestBody": {
+ *        "content": {
+ *          "application/json": {
+ *            "schema": {
+ *              "type": "object"
+ *            }
+ *          }
+ *        }
+ *      },
+ *      "tags": ["Project"],
+ *      "responses": {
+ *        "200": {
+ *          "description": "Assing has been complete"
+ *        },
+ *        "404": {
+ *          "description": "Project not found"
+ *        },
+ *        "500": {
+ *          "description": "Internal server error"
+ *        }
+ *      }
+ *    }
+ *  }
+ * }
+ */
+
+/**
+ * @swagger
+ * {
+ *  "/projects/{id}": {
+ *    "delete": {
+ *      "summary": "Delete a project by id",
+ *      "parameters": [
+ *        {
+ *          "name": "id",
+ *          "in": "path",
+ *          "description": "The id of the project",
+ *          "type": "integer"
+ *        }
+ *      ],
+ *      "tags": ["Project"],
+ *      "responses": {
+ *        "200": {
+ *          "description": "Project has been delete"
+ *        },
+ *        "404": {
+ *          "description": "Project not found"
+ *        },
+ *        "500": {
+ *          "description": "Internal server error"
+ *        }
+ *      }
+ *    }
+ *  }
+ * }
  */
 
 module.exports = router
